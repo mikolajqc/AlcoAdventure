@@ -33,7 +33,7 @@ public class Drinker//: //MonoBehaviour
 		CalculateLiquids();
 	}
 	
-	static string Initialize(float newBodyMass, float newBodyHeight, bool newIsMale, bool newIsStomachEmpty)
+	public static string Initialize(float newBodyMass, float newBodyHeight, bool newIsMale, bool newIsStomachEmpty)
 	{
 		string message = "";
 
@@ -50,7 +50,7 @@ public class Drinker//: //MonoBehaviour
 		return message;
 	}
 
-	static string UpdateStatus()
+	public static string UpdateStatus()
 	{
 		string message = "";
 		timePassed += Time.deltaTime;

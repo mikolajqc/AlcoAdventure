@@ -59,11 +59,15 @@ public class VolumeSelect : MonoBehaviour {
     // Use this for initialization
     void Start () {
         CreateShot();
-	}
+        if (!Drinker.isInitialized)
+            print(Drinker.Initialize(75, 185, true, true));
+    }
 	
 	// Update is called once per frame
 	void Update () {
-	
+        string message = Drinker.UpdateStatus();
+        if (message != "")
+            print(message);
 	}
 
     void CreateShot()

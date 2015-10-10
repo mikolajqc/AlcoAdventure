@@ -25,13 +25,16 @@ public class AlcoholSelect : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
+        if (!Drinker.isInitialized)
+            print(Drinker.Initialize(75, 185, true, true));
     }
 	
 	// Update is called once per frame
 	void Update () {
         CheckResolution();
-
+        string message = Drinker.UpdateStatus();
+        if (message != "")
+            print(message);
     }
 
     //checking resolution in real time
