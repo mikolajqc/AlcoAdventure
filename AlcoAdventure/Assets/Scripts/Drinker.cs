@@ -22,15 +22,35 @@ public class Drinker//: //MonoBehaviour
 	static int absorptionProgress = 0;
 	static float bmi;
 
-	static DateTime soberingTime = new DateTime();
+	static DateTime soberingTime;
 
 	static float timePassed = 0;
 	
-	void Start () 
+
+	static void SimulateSobering()
 	{
-		CalculateBMI();
-		CalculateAbsorptionTime();
-		CalculateLiquids();
+		float hourDivider = 6;
+
+		float alcoholDrunkCopy = alcoholDrunk;
+		float alcoholAbsorbedCopy = alcoholAbsorbed;
+		int absorptioProgressCopy = absorptionProgress;
+
+		double counter = 0; //each point is 10 minutes
+		do
+		{
+			for(int i = 0; i < 60/hourDivider; ++i)
+				AbsorbAlcohol();
+			EliminateAlcohol(hourDivider);
+			++counter;
+		}
+		while (CalculatePromils() > 0.2);
+
+
+		soberingTime = DateTime.Now.AddHours(counter/hourDivider);
+
+		alcoholAbsorbed = alcoholAbsorbedCopy;
+		alcoholDrunk = alcoholDrunkCopy;
+		absorptionProgress = absorptioProgressCopy;
 	}
 	
 	public static string Initialize(float newBodyMass, float newBodyHeight, bool newIsMale, bool newIsStomachEmpty)
@@ -65,10 +85,9 @@ public class Drinker//: //MonoBehaviour
 		return message;
 	}
 
-	public static string CalculatePromils()
+	public static float CalculatePromils()
 	{
-		promils = alcoholAbsorbed / liquidMass;
-		return ("Promils = " + promils);
+		return alcoholAbsorbed / liquidMass;
 	}
 
 	public static string CalculateAbsorptionTime()
@@ -129,18 +148,22 @@ public class Drinker//: //MonoBehaviour
 		return("absorbed " + alcoholAbsorbed + " \nProgress" + absorptionProgress);
 	}
 
-	static string EliminateAlcohol()
+	static string EliminateAlcohol(float divider = 60f)
 	{
-		float alcoholEliminated = (MAX_ALCOHOL_ELIMINATION * alcoholAbsorbed) / (4.2f + alcoholAbsorbed) / 60.0f;
+		float alcoholEliminated = (MAX_ALCOHOL_ELIMINATION * alcoholAbsorbed) / (4.2f + alcoholAbsorbed) / divider;
 		alcoholAbsorbed -= alcoholEliminated;
 		if (alcoholAbsorbed < 0)
 			alcoholAbsorbed = 0;
 		return("eliminated " + alcoholEliminated + "remaining " + alcoholAbsorbed);
 	}
 
-	static public void Drink(float alcoholQuantity)
+	static public string Drink(float alcoholQuantity)
 	{
 		alcoholDrunk += alcoholQuantity;
+		absorptionProgress = 0;
+
+		SimulateSobering();
+		return "Sober by: " + soberingTime;
 	}
 
 }

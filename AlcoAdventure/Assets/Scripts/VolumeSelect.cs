@@ -130,18 +130,18 @@ public class VolumeSelect : MonoBehaviour {
         {
             ///Calculating mass of alkohol
             alcoholMass = 0.798f * shot.Amount[0] * (shot.Power/100);
-            Drinker.Drink(alcoholMass);
+            print(Drinker.Drink(alcoholMass));
         }
         if (GUI.Button(new Rect(2 * BREAKEWIDTH + BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "medium"))
         {
             alcoholMass = 0.798f * shot.Amount[1] * (shot.Power / 100);
-            Drinker.Drink(alcoholMass);
-        }
+			print(Drinker.Drink(alcoholMass));
+		}
         if (GUI.Button(new Rect(3 * BREAKEWIDTH + 2 * BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "high"))
         {
             alcoholMass = 0.798f * shot.Amount[2] * (shot.Power / 100);
-            Drinker.Drink(alcoholMass);
-        }
+			print(Drinker.Drink(alcoholMass));
+		}
         if (GUI.Button(new Rect(BREAKEWIDTH, 3 * BREAKEHEIGHT + 2 * BUTTONHEIGHT, 3 * BUTTONWIDTH + 2 * BREAKEWIDTH, BUTTONHEIGHT / 2), "Back"))
         {
             Application.LoadLevel("AlcoholSelect");
