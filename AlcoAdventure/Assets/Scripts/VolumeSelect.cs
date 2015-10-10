@@ -65,6 +65,7 @@ public class VolumeSelect : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        CheckResolution();
         string message = Drinker.UpdateStatus();
         if (message != "")
             print(message);
@@ -124,20 +125,36 @@ public class VolumeSelect : MonoBehaviour {
 
     void OnGUI()
     {
+        //variable about kind of amount texture
+        int textureCategory;
+        if (alcoholSelected==0)
+        {
+            textureCategory = 0;
+        }
+        else if(alcoholSelected == 1 || alcoholSelected == 2)
+        {
+            textureCategory = 1;
+        }
+        else
+        {
+            textureCategory = 2;
+        }
+
 
         //Alcohol selection
-        if (GUI.Button(new Rect(BREAKEWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "small"))
+        if (GUI.Button(new Rect(BREAKEWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), amountTextures[textureCategory*3]))
         {
             ///Calculating mass of alkohol
             alcoholMass = 0.798f * shot.Amount[0] * (shot.Power/100);
             Drinker.Drink(alcoholMass);
+            print(textureCategory * 3);
         }
-        if (GUI.Button(new Rect(2 * BREAKEWIDTH + BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "medium"))
+        if (GUI.Button(new Rect(2 * BREAKEWIDTH + BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), amountTextures[textureCategory * 3 + 1]))
         {
             alcoholMass = 0.798f * shot.Amount[1] * (shot.Power / 100);
             Drinker.Drink(alcoholMass);
         }
-        if (GUI.Button(new Rect(3 * BREAKEWIDTH + 2 * BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "high"))
+        if (GUI.Button(new Rect(3 * BREAKEWIDTH + 2 * BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), amountTextures[textureCategory * 3 + 2]))
         {
             alcoholMass = 0.798f * shot.Amount[2] * (shot.Power / 100);
             Drinker.Drink(alcoholMass);

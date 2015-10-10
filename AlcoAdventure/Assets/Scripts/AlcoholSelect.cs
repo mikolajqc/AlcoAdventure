@@ -48,12 +48,6 @@ public class AlcoholSelect : MonoBehaviour {
 
     void OnGUI()
     {
-        //enum alkohol choice
-
-
-        
-
-
         //Alcohol MENU
         if (GUI.Button(new Rect(BREAKEWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), alcoholTextures[0]))
         {
