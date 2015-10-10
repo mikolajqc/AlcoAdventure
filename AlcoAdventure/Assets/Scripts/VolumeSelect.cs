@@ -61,7 +61,6 @@ public class VolumeSelect : MonoBehaviour {
     // Use this for initialization
     void Start () {
         CreateShot();
-
     }
 	
 	// Update is called once per frame

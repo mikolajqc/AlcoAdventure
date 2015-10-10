@@ -11,6 +11,7 @@ public class Drinker//: //MonoBehaviour
 	public static float bodyHeight; //cm
 	public static bool isMale;
 	public static bool isStomachEmpty = true;
+	public static string myName = "";
 
 	//calculated by program
 	static float liquidMass;
@@ -35,7 +36,7 @@ public class Drinker//: //MonoBehaviour
 		float alcoholAbsorbedCopy = alcoholAbsorbed;
 		int absorptioProgressCopy = absorptionProgress;
 
-		double counter = 0; //each point is 10 minutes
+		double counter = 0; //each point is 30 minutes
 		do
 		{
 			for(int i = 0; i < 60/hourDivider; ++i)
@@ -53,7 +54,7 @@ public class Drinker//: //MonoBehaviour
 		absorptionProgress = absorptioProgressCopy;
 	}
 	
-	public static string Initialize(float newBodyMass, float newBodyHeight, bool newIsMale, bool newIsStomachEmpty)
+	public static string Initialize(float newBodyMass, float newBodyHeight, bool newIsMale, bool newIsStomachEmpty, string newName)
 	{
 		string message = "";
 
@@ -61,6 +62,8 @@ public class Drinker//: //MonoBehaviour
 		bodyHeight = newBodyHeight;
 		isMale = newIsMale;
 		isStomachEmpty = newIsStomachEmpty;
+		myName = newName;
+
 		message += CalculateBMI();
 		message += CalculateAbsorptionTime();
 		message += CalculateLiquids();
