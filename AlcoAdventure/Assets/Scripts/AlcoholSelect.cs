@@ -82,7 +82,7 @@ public class AlcoholSelect : MonoBehaviour {
             alcoholChoice = AlcoholChoice.DENATURATE;
             Application.LoadLevel("VolumeSelect");
         }
-        if (GUI.Button(new Rect(BREAKEWIDTH, 3 * BREAKEHEIGHT + 2* BUTTONHEIGHT, 3*BUTTONWIDTH + 2*BREAKEWIDTH, BUTTONHEIGHT/2), alcoholTextures[6]))
+        if (GUI.Button(new Rect(BREAKEWIDTH, 3 * BREAKEHEIGHT + 2* BUTTONHEIGHT, 3*BUTTONWIDTH + 2*BREAKEWIDTH, BUTTONHEIGHT/2), "back"))
         {
             //Back
         }

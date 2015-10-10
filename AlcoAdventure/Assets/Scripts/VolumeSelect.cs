@@ -48,6 +48,8 @@ public class VolumeSelect : MonoBehaviour {
     public float BREAKEWIDTH = Screen.width / 10;
     public float BREAKEHEIGHT = Screen.height / 16;
 
+    //textures of alcohol amount
+    public Texture[] amountTextures = new Texture[9];
 
     //declaration of Shot class
     public Shot shot;
@@ -124,17 +126,17 @@ public class VolumeSelect : MonoBehaviour {
         {
             ///Calculating mass of alkohol
             alcoholMass = 0.798f * shot.Amount[0] * (shot.Power/100);
-            gameObject.GetComponent<Drinker>().Drink(alcoholMass);
+            Drinker.Drink(alcoholMass);
         }
         if (GUI.Button(new Rect(2 * BREAKEWIDTH + BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "medium"))
         {
             alcoholMass = 0.798f * shot.Amount[1] * (shot.Power / 100);
-            gameObject.GetComponent<Drinker>().Drink(alcoholMass);
+            Drinker.Drink(alcoholMass);
         }
         if (GUI.Button(new Rect(3 * BREAKEWIDTH + 2 * BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "high"))
         {
             alcoholMass = 0.798f * shot.Amount[2] * (shot.Power / 100);
-            print(alcoholMass);
+            Drinker.Drink(alcoholMass);
         }
         if (GUI.Button(new Rect(BREAKEWIDTH, 3 * BREAKEHEIGHT + 2 * BUTTONHEIGHT, 3 * BUTTONWIDTH + 2 * BREAKEWIDTH, BUTTONHEIGHT / 2), "Back"))
         {
