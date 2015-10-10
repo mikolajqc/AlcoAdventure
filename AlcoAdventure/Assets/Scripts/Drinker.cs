@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class Drinker: MonoBehaviour
+public class Drinker//: //MonoBehaviour
 {
 	//user input required
 	public static float bodyMass; //kg
@@ -31,28 +31,43 @@ public class Drinker: MonoBehaviour
 		CalculateLiquids();
 	}
 	
-	void Update () 
+	static string Initialize(float newBodyMass, float newBodyHeight, bool newIsMale, bool newIsStomachEmpty)
 	{
+		string message = "";
+
+		bodyMass = newBodyMass;
+		bodyHeight = newBodyHeight;
+		isMale = newIsMale;
+		isStomachEmpty = newIsStomachEmpty;
+		message += CalculateBMI();
+		message += CalculateAbsorptionTime();
+		message += CalculateLiquids();
+
+		return message;
+	}
+
+	static string UpdateStatus()
+	{
+		string message = "";
 		timePassed += Time.deltaTime;
-		if(timePassed >= 1)
+		if (timePassed >= 1)
 		{
 			timePassed = 0;
-			if(alcoholDrunk > 0)
-				AbsorbAlcohol();
+			if (alcoholDrunk > 0)
+				message += AbsorbAlcohol();
 			if (alcoholAbsorbed > 0)
-				EliminateAlcohol();
+				message += EliminateAlcohol();
 		}
+		return message;
 	}
-	
 
-
-	public static void CalculatePromils()
+	public static string CalculatePromils()
 	{
 		promils = alcoholAbsorbed / liquidMass;
-		print("Promils = " + promils);
+		return ("Promils = " + promils);
 	}
 
-	public static void CalculateAbsorptionTime()
+	public static string CalculateAbsorptionTime()
 	{
 		if (isStomachEmpty)
 			absorptionTime = 30;
@@ -60,16 +75,16 @@ public class Drinker: MonoBehaviour
 			absorptionTime = 60;
 
 
-		print("Absorption Time = " + absorptionTime);
+		return("Absorption Time = " + absorptionTime);
 	}
 	
-	public static void CalculateBMI()
+	public static string CalculateBMI()
 	{
 		bmi = bodyMass / ((bodyHeight/100) * (bodyHeight/100));
-		print("BMI = " + bmi);
+		return ("BMI = " + bmi);
 	}
 
-	static void CalculateLiquids()
+	static string CalculateLiquids()
 	{
 		float multiplier;
 		if (isMale)
@@ -81,8 +96,7 @@ public class Drinker: MonoBehaviour
 		float liquidExcess = 0.15f * overweight;
 
 		liquidMass = multiplier * (bodyMass - overweight) + liquidExcess;
-		print(bodyMass - overweight);
-		print(liquidMass);
+		return (bodyMass - overweight + " " + liquidMass);
 	}
 
 	static float CalculateOverweight()
@@ -98,7 +112,7 @@ public class Drinker: MonoBehaviour
 		return bmiDifference * ((bodyHeight / 100) * (bodyHeight / 100));
     }
 
-	static void AbsorbAlcohol()
+	static string AbsorbAlcohol()
 	{
 		if (absorptionProgress < absorptionTime)
 		{
@@ -108,16 +122,16 @@ public class Drinker: MonoBehaviour
 		}
 		else
 			absorptionProgress = 0;
-		print("absorbed " + alcoholAbsorbed + " \nProgress" + absorptionProgress);
+		return("absorbed " + alcoholAbsorbed + " \nProgress" + absorptionProgress);
 	}
 
-	static void EliminateAlcohol()
+	static string EliminateAlcohol()
 	{
 		float alcoholEliminated = (MAX_ALCOHOL_ELIMINATION * alcoholAbsorbed) / (4.2f + alcoholAbsorbed) / 60.0f;
 		alcoholAbsorbed -= alcoholEliminated;
 		if (alcoholAbsorbed < 0)
 			alcoholAbsorbed = 0;
-		print("eliminated " + alcoholEliminated + "remaining " + alcoholAbsorbed);
+		return("eliminated " + alcoholEliminated + "remaining " + alcoholAbsorbed);
 	}
 
 	static public void Drink(float alcoholQuantity)
