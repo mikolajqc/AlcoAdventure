@@ -40,7 +40,7 @@ public class Shot
 
 public class VolumeSelect : MonoBehaviour {
 
-
+    //information from AlcoholSelect about kind of alcohol
     public static int alcoholSelected;
 
     public float BUTTONWIDTH = Screen.width / 5;
@@ -49,7 +49,7 @@ public class VolumeSelect : MonoBehaviour {
     public float BREAKEHEIGHT = Screen.height / 16;
 
 
-
+    //declaration of Shot class
     public Shot shot;
     public float alcoholMass;
 
@@ -124,12 +124,12 @@ public class VolumeSelect : MonoBehaviour {
         {
             ///Calculating mass of alkohol
             alcoholMass = 0.798f * shot.Amount[0] * (shot.Power/100);
-            print(alcoholMass);
+            gameObject.GetComponent<Drinker>().Drink(alcoholMass);
         }
         if (GUI.Button(new Rect(2 * BREAKEWIDTH + BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "medium"))
         {
             alcoholMass = 0.798f * shot.Amount[1] * (shot.Power / 100);
-            print(alcoholMass);
+            gameObject.GetComponent<Drinker>().Drink(alcoholMass);
         }
         if (GUI.Button(new Rect(3 * BREAKEWIDTH + 2 * BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "high"))
         {

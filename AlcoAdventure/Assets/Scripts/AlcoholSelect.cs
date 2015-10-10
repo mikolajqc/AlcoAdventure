@@ -9,6 +9,9 @@ public class AlcoholSelect : MonoBehaviour {
     public float BREAKEWIDTH = Screen.width / 10;
     public float BREAKEHEIGHT = Screen.height / 16;
 
+    //Kinds of alcohol textures in MENU
+    public Texture[] alcoholTextures = new Texture[6];
+
     public enum AlcoholChoice
     {
         BEER,
@@ -49,37 +52,37 @@ public class AlcoholSelect : MonoBehaviour {
 
 
         //Alcohol MENU
-        if (GUI.Button(new Rect(BREAKEWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "Beer"))
+        if (GUI.Button(new Rect(BREAKEWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), alcoholTextures[0]))
         {
             alcoholChoice = AlcoholChoice.BEER;
             Application.LoadLevel("VolumeSelect");
         }
-        if (GUI.Button(new Rect(2 * BREAKEWIDTH + BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "Wine"))
+        if (GUI.Button(new Rect(2 * BREAKEWIDTH + BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), alcoholTextures[1]))
         {
             alcoholChoice = AlcoholChoice.WINE;
             Application.LoadLevel("VolumeSelect");
         }
-        if (GUI.Button(new Rect(3 * BREAKEWIDTH + 2 * BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "Champagne"))
+        if (GUI.Button(new Rect(3 * BREAKEWIDTH + 2 * BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), alcoholTextures[2]))
         {
             alcoholChoice = AlcoholChoice.CHAMPAGNE;
             Application.LoadLevel("VolumeSelect");
         }
-        if (GUI.Button(new Rect(BREAKEWIDTH, 2 * BREAKEHEIGHT + BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "Wodka"))
+        if (GUI.Button(new Rect(BREAKEWIDTH, 2 * BREAKEHEIGHT + BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), alcoholTextures[3]))
         {
             alcoholChoice = AlcoholChoice.VODKA;
             Application.LoadLevel("VolumeSelect");
         }
-        if (GUI.Button(new Rect(2 * BREAKEWIDTH + BUTTONWIDTH, 2 * BREAKEHEIGHT + BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "Spirit"))
+        if (GUI.Button(new Rect(2 * BREAKEWIDTH + BUTTONWIDTH, 2 * BREAKEHEIGHT + BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), alcoholTextures[4]))
         {
             alcoholChoice = AlcoholChoice.SPIRIT;
             Application.LoadLevel("VolumeSelect");
         }
-        if (GUI.Button(new Rect(3 * BREAKEWIDTH + 2 * BUTTONWIDTH, 2 * BREAKEHEIGHT + BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "Denaturate"))
+        if (GUI.Button(new Rect(3 * BREAKEWIDTH + 2 * BUTTONWIDTH, 2 * BREAKEHEIGHT + BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), alcoholTextures[5]))
         {
             alcoholChoice = AlcoholChoice.DENATURATE;
             Application.LoadLevel("VolumeSelect");
         }
-        if (GUI.Button(new Rect(BREAKEWIDTH, 3 * BREAKEHEIGHT + 2* BUTTONHEIGHT, 3*BUTTONWIDTH + 2*BREAKEWIDTH, BUTTONHEIGHT/2), "Back"))
+        if (GUI.Button(new Rect(BREAKEWIDTH, 3 * BREAKEHEIGHT + 2* BUTTONHEIGHT, 3*BUTTONWIDTH + 2*BREAKEWIDTH, BUTTONHEIGHT/2), alcoholTextures[6]))
         {
             //Back
         }
