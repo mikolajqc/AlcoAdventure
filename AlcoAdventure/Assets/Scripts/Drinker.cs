@@ -5,22 +5,24 @@ using System;
 public class Drinker: MonoBehaviour
 {
 	//user input required
-	public float bodyMass; //kg
-	public float bodyHeight; //cm
-	public bool isMale;
-	public bool isStomachEmpty = true;
+	public static float bodyMass; //kg
+	public static float bodyHeight; //cm
+	public static bool isMale;
+	public static bool isStomachEmpty = true;
 
 	//calculated by program
-	float liquidMass;
+	static float liquidMass;
 	const float MAX_ALCOHOL_ELIMINATION = 10;
-	public float alcoholDrunk = 0;
-	float alcoholAbsorbed = 0;
-	float promils;
-	int absorptionTime; //in minutes
-	int absorptionProgress = 0;
-	float bmi;
+	static float alcoholDrunk = 0;
+	static float alcoholAbsorbed = 0;
+	static float promils;
+	static int absorptionTime; //in minutes
+	static int absorptionProgress = 0;
+	static float bmi;
 
-	float timePassed = 0;
+	static DateTime soberingTime = new DateTime();
+
+	static float timePassed = 0;
 	
 	void Start () 
 	{
@@ -44,13 +46,13 @@ public class Drinker: MonoBehaviour
 	
 
 
-	public void CalculatePromils()
+	public static void CalculatePromils()
 	{
 		promils = alcoholAbsorbed / liquidMass;
 		print("Promils = " + promils);
 	}
 
-	public void CalculateAbsorptionTime()
+	public static void CalculateAbsorptionTime()
 	{
 		if (isStomachEmpty)
 			absorptionTime = 30;
@@ -61,13 +63,13 @@ public class Drinker: MonoBehaviour
 		print("Absorption Time = " + absorptionTime);
 	}
 	
-	public void CalculateBMI()
+	public static void CalculateBMI()
 	{
 		bmi = bodyMass / ((bodyHeight/100) * (bodyHeight/100));
 		print("BMI = " + bmi);
 	}
 
-	void CalculateLiquids()
+	static void CalculateLiquids()
 	{
 		float multiplier;
 		if (isMale)
@@ -83,7 +85,7 @@ public class Drinker: MonoBehaviour
 		print(liquidMass);
 	}
 
-	float CalculateOverweight()
+	static float CalculateOverweight()
 	{
 		float bmiDifference;
 		if (bmi > 25)
@@ -96,7 +98,7 @@ public class Drinker: MonoBehaviour
 		return bmiDifference * ((bodyHeight / 100) * (bodyHeight / 100));
     }
 
-	void AbsorbAlcohol()
+	static void AbsorbAlcohol()
 	{
 		if (absorptionProgress < absorptionTime)
 		{
@@ -109,7 +111,7 @@ public class Drinker: MonoBehaviour
 		print("absorbed " + alcoholAbsorbed + " \nProgress" + absorptionProgress);
 	}
 
-	void EliminateAlcohol()
+	static void EliminateAlcohol()
 	{
 		float alcoholEliminated = (MAX_ALCOHOL_ELIMINATION * alcoholAbsorbed) / (4.2f + alcoholAbsorbed) / 60.0f;
 		alcoholAbsorbed -= alcoholEliminated;
@@ -118,7 +120,7 @@ public class Drinker: MonoBehaviour
 		print("eliminated " + alcoholEliminated + "remaining " + alcoholAbsorbed);
 	}
 
-	public void Drink(float alcoholQuantity)
+	static public void Drink(float alcoholQuantity)
 	{
 		alcoholDrunk += alcoholQuantity;
 	}
