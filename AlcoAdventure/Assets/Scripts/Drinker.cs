@@ -4,6 +4,8 @@ using System;
 
 public class Drinker//: //MonoBehaviour
 {
+	public static bool isInitialized = false;
+
 	//user input required
 	public static float bodyMass; //kg
 	public static float bodyHeight; //cm
@@ -42,6 +44,8 @@ public class Drinker//: //MonoBehaviour
 		message += CalculateBMI();
 		message += CalculateAbsorptionTime();
 		message += CalculateLiquids();
+
+		isInitialized = true;
 
 		return message;
 	}
