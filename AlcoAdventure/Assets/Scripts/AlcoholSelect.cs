@@ -33,6 +33,9 @@ public class AlcoholSelect : MonoBehaviour {
         string message = Drinker.UpdateStatus();
         if (message != "")
             print(message);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
     }
 
     //checking resolution in real time
