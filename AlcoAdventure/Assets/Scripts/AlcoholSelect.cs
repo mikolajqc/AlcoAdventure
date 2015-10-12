@@ -9,8 +9,12 @@ public class AlcoholSelect : MonoBehaviour {
     public float BREAKEWIDTH = Screen.width / 10;
     public float BREAKEHEIGHT = Screen.height / 16;
 
+    //Alcohol MENU styles
+    public GUISkin MenuStyle;
+
     //Kinds of alcohol textures in MENU
     public Texture[] alcoholTextures = new Texture[6];
+    public Texture backTexture;
 
     public enum AlcoholChoice
     {
@@ -25,6 +29,8 @@ public class AlcoholSelect : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+       // MenuStyle = new GUISkin();
+
     }
 	
 	// Update is called once per frame
@@ -49,6 +55,9 @@ public class AlcoholSelect : MonoBehaviour {
 
     void OnGUI()
     {
+        //GUI.backgroundColor = Color.yellow;
+        GUI.skin = MenuStyle;
+
         //Alcohol MENU
         if (GUI.Button(new Rect(BREAKEWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), alcoholTextures[0]))
         {
@@ -80,7 +89,9 @@ public class AlcoholSelect : MonoBehaviour {
             alcoholChoice = AlcoholChoice.DENATURATE;
             Application.LoadLevel("VolumeSelect");
         }
-        if (GUI.Button(new Rect(BREAKEWIDTH, 3 * BREAKEHEIGHT + 2* BUTTONHEIGHT, 3*BUTTONWIDTH + 2*BREAKEWIDTH, BUTTONHEIGHT/2), "back"))
+
+        GUI.skin = null;
+        if (GUI.Button(new Rect(BREAKEWIDTH, 3 * BREAKEHEIGHT + 2* BUTTONHEIGHT, 3*BUTTONWIDTH + 2*BREAKEWIDTH, BUTTONHEIGHT/2), backTexture))
         {
             //Back
         }

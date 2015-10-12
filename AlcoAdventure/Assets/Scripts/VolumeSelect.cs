@@ -4,14 +4,11 @@ using System.Collections.Generic;
 
 public class Shot
 {
+    //Shot class is a class discribing selected alcohol.
+    //This class has information about glasses to drink this alcohol and information about alcohol percent.
+    
     List<int> amount = new List<int>(); // list of access volumes
     public float power = 0; // power of alko (%)
-
-    /*public Shot(List<int> amount, int power)
-    {
-        this.amount = amount;
-        this.power = power;
-    }*/
 
     public List<int> Amount
     {
@@ -42,29 +39,34 @@ public class VolumeSelect : MonoBehaviour {
 
     //information from AlcoholSelect about kind of alcohol
     public static int alcoholSelected;
+
+    //this variable inform Stats.cs about amount of drink to calculate alcohol mass.
     public static float amount;
 
-
+    //information about Buttons size
     public float BUTTONWIDTH = Screen.width / 5;
     public float BUTTONHEIGHT = Screen.height / 4;
     public float BREAKEWIDTH = Screen.width / 10;
     public float BREAKEHEIGHT = Screen.height / 16;
 
     //textures of alcohol amount
-    public Texture[] amountTextures = new Texture[9];
-
-    //declaration of Shot class
+    public Texture[] amountTextures = new Texture[9];// it is not optimal. Repo contains only 3 pictures!
+    public Texture backTexture;
+    //declaration of shot object
     public Shot shot;
-    public float alcoholMass;
+    public static float alcoholMass;
 
+    public GUISkin MenuStyle;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         CreateShot();
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         CheckResolution();
         string message = Drinker.UpdateStatus();
         if (message != "")
@@ -133,6 +135,8 @@ public class VolumeSelect : MonoBehaviour {
 
     void OnGUI()
     {
+
+
         //variable about kind of amount texture
         int textureCategory;
         if (alcoholSelected==0)
@@ -151,7 +155,7 @@ public class VolumeSelect : MonoBehaviour {
             amount = 2;
         }
 
-
+        GUI.skin = MenuStyle;
         //Alcohol selection
         if (GUI.Button(new Rect(BREAKEWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), amountTextures[textureCategory * 3]))
         {
@@ -160,34 +164,29 @@ public class VolumeSelect : MonoBehaviour {
 
             print(Drinker.Drink(alcoholMass));
             print(textureCategory * 3);
-            Stats.alcoholMass = alcoholMass;
+            //Stats.alcoholMass = alcoholMass;
             Application.LoadLevel("Stats");
-            
         }
             
-
         if (GUI.Button(new Rect(2 * BREAKEWIDTH + BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), amountTextures[textureCategory * 3 + 1]))
         {
             alcoholMass = 0.798f * shot.Amount[1] * (shot.Power / 100);
             print (Drinker.Drink(alcoholMass));
-            Stats.alcoholMass = alcoholMass;
+          //  Stats.alcoholMass = alcoholMass;
             Application.LoadLevel("Stats");
         }
         if (GUI.Button(new Rect(3 * BREAKEWIDTH + 2 * BUTTONWIDTH, BREAKEHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), amountTextures[textureCategory * 3 + 2]))
 
-        { 
-
-
-        
+        {
             alcoholMass = 0.798f * shot.Amount[2] * (shot.Power / 100);
 			print(Drinker.Drink(alcoholMass));
-            Stats.alcoholMass = alcoholMass;
+           // Stats.alcoholMass = alcoholMass;
             Application.LoadLevel("Stats");
-            
         }
-        if (GUI.Button(new Rect(BREAKEWIDTH, 3 * BREAKEHEIGHT + 2 * BUTTONHEIGHT, 3 * BUTTONWIDTH + 2 * BREAKEWIDTH, BUTTONHEIGHT / 2), "Back"))
+        GUI.skin = null;
+        if (GUI.Button(new Rect(BREAKEWIDTH, 3 * BREAKEHEIGHT + 2 * BUTTONHEIGHT, 3 * BUTTONWIDTH + 2 * BREAKEWIDTH, BUTTONHEIGHT / 2), backTexture))
         {
-            Application.LoadLevel("Stats");
+            Application.LoadLevel("AlcoholSelect");
         }
     }
 }
