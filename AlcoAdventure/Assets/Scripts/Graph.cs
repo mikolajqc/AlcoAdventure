@@ -47,7 +47,7 @@ public class Graph : MonoBehaviour
                 x1 = i * incrementScreen;
                 x = i * incrementFunction;
 
-                y = (Mathf.Sin(x))*5;
+                y = 5 * (Mathf.Sin(x));
                 y1 = y/ yDivider;
 
                 //Here is function - z is coordinate = f(x)!
