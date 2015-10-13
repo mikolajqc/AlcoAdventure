@@ -77,7 +77,7 @@ public class Drinker//: //MonoBehaviour
 	{
 		string message = "";
 		timePassed += Time.deltaTime;
-		if (timePassed >= 1)
+		if (timePassed >= 2)
 		{
 			timePassed = 0;
 			if (alcoholDrunk > 0)
