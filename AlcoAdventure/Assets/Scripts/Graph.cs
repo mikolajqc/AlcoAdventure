@@ -15,10 +15,9 @@ public class Graph : MonoBehaviour
     public float[] borders = new float[5];
 
 
-    //public float[] actualColorRGB = new float[3];
     public int resolution = 300;
 
-    //this variable is connect with sober time +10% *h 
+
     public float graphLenght = 1;
     
 
@@ -37,8 +36,6 @@ public class Graph : MonoBehaviour
         float incrementFunction = graphLenght / (resolution - 1); //1/299
         CalculateYDivider();
         
-        // x and y are real parameters of function y=f(x)
-        // x1 and y1 are positions of pointers on graph
         float x1,x, y, y1;
 
         for (int i = 0; i < resolution; ++i)
@@ -54,10 +51,8 @@ public class Graph : MonoBehaviour
                 //Function have to be divide by yDivider to scale it to graphHeight
                 points[i].position = new Vector3(x1 , 0f, y1);
 
-            //Changing color of graph:
             CalculateColor(i, y);
 
-            //Size of graph:
             points[i].size = 0.1f;
             }
     }
